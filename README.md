@@ -1,4 +1,3 @@
 # react-basics-labs
 
-Author: Thavaanesan Kesawan
-@ SETU
+Lab by Thavaanesan K
