@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import './App.css';
 import Task from './components/Task';
 import AddTaskForm from './components/Form';
@@ -9,8 +10,15 @@ function App() {
     tasks: [
       { id:1, title:"Dishes", description: "Empty dishwasher", deadline: "Today", priority: "Medium", done: false},
       { id:2, title: "Laundry", description: "Fold clothes and put away", deadline: "Tomorrow", priority: "High", done: false},
-      { id:3, title: "Tidy up", deadline: "Today", priority:"Life depends on it", done: false}
+      { id:3, title: "Tidy up", deadline: "Today", priority:"Low", done: false}
     ]
+  });
+
+  const [ formState, setFormState ] = useState({
+    title: "",
+    description: "",
+    deadline: "",
+    priority: "",
   });
 
   const doneHandler = (taskIndex) => {
@@ -23,7 +31,43 @@ function App() {
     const tasks = [...taskState.tasks];
     tasks.splice(taskIndex, 1);
     setTaskState({tasks});
-  } 
+  }
+
+  const formChangeHandler = (event) => {
+    let form = {...formState};
+
+    switch(event.target.name) {
+      case "title":
+          form.title = event.target.value;
+          break;
+      case "description":
+          form.description = event.target.value;
+          break;
+      case "deadline":
+          form.deadline = event.target.value;
+          break;
+      case "priority":
+          form.priority = event.target.value;
+          break;
+      default:
+          form = formState;
+    }
+    setFormState(form);
+  }
+
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+
+    const tasks = [...taskState.tasks];
+    const form = {...formState};
+
+    form.id = uuidv4();
+    
+    tasks.push(form);
+    setTaskState({tasks});
+  }
+
+  console.log(formChangeHandler);
 
   return (
     <div className='container'>
@@ -40,7 +84,7 @@ function App() {
           deleteTask = {() => deleteHandler(index)}
         />
       ))}
-      <AddTaskForm/>
+      <AddTaskForm submit={formSubmitHandler} change={formChangeHandler}/>
     </div>
   );
 }
