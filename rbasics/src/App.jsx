@@ -3,6 +3,9 @@ import { v4 as uuidv4 } from 'uuid';
 import './App.css';
 import Task from './components/Task';
 import AddTaskForm from './components/Form';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 
 
 function App() {
@@ -71,19 +74,50 @@ function App() {
 
   return (
     <div className='container'>
-      <h1>Tasky</h1>
-      {taskState.tasks.map((task, index) => (
-        <Task
-          title={task.title}
-          description={task.description}
-          deadline={task.deadline}
-          priority={task.priority}
-          key={task.id}
-          done={task.done}
-          markDone={() => doneHandler(index)}
-          deleteTask = {() => deleteHandler(index)}
-        />
-      ))}
+      {/* App Header */}
+      <Container component="main">
+        <Typography
+          component="h1"
+          variant="h2"
+          align="center"
+          gutterBottom
+          sx={{
+            backgroundColor: 'gray',
+            textAlign: 'center',
+            color: 'white',
+            padding: '20px',
+            margin: '20px 0 40px 0',
+            borderRadius: '4px'
+          }}
+        >
+          Tasky
+        </Typography>
+      </Container>
+      {/* End App Header */}
+      
+      {/* Task Card Grid */}
+      <Container maxWidth="md" component="main">
+        <Grid
+          container
+          spacing={5}
+          alignItems="flex-start"
+          justifyContent="center"
+        >
+          {taskState.tasks.map((task, index) => (
+            <Task
+              title={task.title}
+              description={task.description}
+              deadline={task.deadline}
+              priority={task.priority}
+              key={task.id}
+              done={task.done}
+              markDone={() => doneHandler(index)}
+              deleteTask = {() => deleteHandler(index)}
+            />
+          ))}
+        </Grid>
+      </Container>
+      {/* End Footer */}
       <AddTaskForm submit={formSubmitHandler} change={formChangeHandler}/>
     </div>
   );
