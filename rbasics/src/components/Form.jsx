@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import BeenhereIcon from '@mui/icons-material/Beenhere';
 
 function AddTaskForm(props){
   return (
@@ -60,7 +61,7 @@ function AddTaskForm(props){
             alignContent: "center"
           }}
         >
-          Add Task
+          <BeenhereIcon/>
         </Button>
       </div>
     </Box>

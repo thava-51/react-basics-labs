@@ -6,6 +6,10 @@ import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AssignmentTurnedIn from '@mui/icons-material/AssignmentTurnedIn';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
 
 function Task(props){
     return (
@@ -75,7 +79,13 @@ function Task(props){
                     color="success"
                     onClick={props.markDone}
                 >
-                    Done
+                    <Tooltip title="Mark as done">
+                        <IconButton>
+                            <AssignmentTurnedIn
+                                sx={{ color: 'white'}}
+                            />
+                        </IconButton>
+                    </Tooltip>
                 </Button>
                 <Button
                     variant="contained"
@@ -83,7 +93,14 @@ function Task(props){
                     color="error"
                     onClick={props.deleteTask}
                 >
-                    Delete
+                    <Tooltip title="Delete task">
+                        <IconButton
+                                sx={{ color: 'white'}}
+                        >
+                            <DeleteIcon/>
+                        </IconButton>
+                    </Tooltip>
+                    
                 </Button>
             </CardActions>
         </Card>
